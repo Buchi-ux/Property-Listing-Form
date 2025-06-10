@@ -1,0 +1,27 @@
+import React from "react"
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "outline"
+}
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className = "", variant = "default", ...props }, ref) => {
+    const base =
+      "inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors focus:outline-none"
+
+    const styles = {
+      default: "bg-green-600 text-white hover:bg-green-700",
+      outline: "border border-gray-300 text-gray-700 hover:bg-gray-100",
+    }
+
+    return (
+      <button
+        ref={ref}
+        className={`${base} ${styles[variant]} ${className}`}
+        {...props}
+      />
+    )
+  }
+)
+
+Button.displayName = "Button"
